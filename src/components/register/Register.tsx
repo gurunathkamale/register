@@ -4,9 +4,15 @@ import {  FaMailBulk,  FaUser } from "react-icons/fa"
 import Button from "../common/Button"
 import { FaUnlock } from "react-icons/fa6"
 
+type User = {
+  username: string,
+  email: string,
+  password: string,
+  confirmPassword: string
+}
 
 const Register = () => {
-    const [user, setUser] = useState({
+    const [user, setUser] = useState<User>({
         username: '',
         email: '',
         password: '',
@@ -16,6 +22,12 @@ const Register = () => {
     const handleSubmit=(e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         console.log(user)
+        setUser({        
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword:''
+        })
     }
   return (
     <div className=" min-h-screen flex items-center flex-col justify-center bg-gradient-to-br from-green-300 from-15% via-green-200 via-50% to-purple-200 to-35%">
