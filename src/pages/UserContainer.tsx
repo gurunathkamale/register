@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getUsers, postData } from "../services/user.services";
 import type { CreatePayloadPost, User } from "../types/user.types";
 
-// import PostUser from "./PostUser";
-// import UserPage from "./User";
+
 import { Outlet } from "react-router-dom";
 
 
@@ -30,28 +29,25 @@ const UserContainer: React.FC = () => {
         }
       }
     };
-    
+
     fetchUsers();
 
     return () => {
       isMounted = true;
     };
-
   }, []);
 
-   const handlePost = async (payload: CreatePayloadPost):Promise<void> => {
+  const handlePost = async (payload: CreatePayloadPost): Promise<void> => {
     const newPost = await postData(payload);
 
-   
     setUsers((prev) => [...prev, newPost]);
   };
 
-  return(
+  return (
     <>
-{/* <PostUser onPost={handlePost} />
-<UserPage users={users} loading={loading}/> */}
-<Outlet context={{users, loading, onPost: handlePost}}/>
+      
+      <Outlet context={{ users, loading, onPost: handlePost }} />
     </>
-  )
-}
-  export default UserContainer;
+  );
+};
+export default UserContainer;

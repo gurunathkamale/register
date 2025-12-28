@@ -1,18 +1,15 @@
-// import React from "react";
-// import { getUsers } from "../services/user.services";
+
 import type { User } from "../types/user.types";
 import Loader from "../icons/Loader";
 import { useOutletContext } from "react-router-dom";
 
+type contextType = {
+  loading: boolean;
+  users: User[];
+};
 
-type contextType= {
-  loading: boolean,
-  users: User[]
-}
-
-
-const UserPage= () => {
-  const { loading, users } = useOutletContext<contextType>()
+const UserPage = () => {
+  const { loading, users } = useOutletContext<contextType>();
 
   if (loading) return <Loader />;
 

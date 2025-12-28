@@ -7,16 +7,13 @@ import Loader from "../icons/Loader";
 import { useOutletContext } from "react-router-dom";
 
 
-// type props ={
-//     onPost:(payload: CreatePayloadPost)=> Promise<void>
-// }
 
 type ContextType = {
-    onPost:(payload: CreatePayloadPost)=>Promise<void>
-}
+  onPost: (payload: CreatePayloadPost) => Promise<void>;
+};
 
 const PostUser = () => {
-    const {onPost} = useOutletContext<ContextType>()
+  const { onPost } = useOutletContext<ContextType>();
   const [userData, setUserData] = useState<CreatePayloadPost>({
     title: "",
     body: "",
@@ -24,15 +21,12 @@ const PostUser = () => {
   });
   const [loading, setLoading] = useState(false);
 
-
   const handleData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await onPost(userData)
-      setUserData({title: "",
-    body: "",
-    userId: null,})
+      await onPost(userData);
+      setUserData({ title: "", body: "", userId: null });
     } catch (error) {
       console.error("POST Failed", error);
     } finally {
@@ -42,9 +36,8 @@ const PostUser = () => {
 
   if (loading) return <Loader />;
   return (
-     <div className=" min-h-screen flex items-center flex-col justify-center bg-gradient-to-bl from-indigo-400 via-purple-500 to-pink-500">
-      <h3 className="text-2xl font-semibold text-gray-800 mb-6">
-      User Form </h3>
+    <div className=" min-h-screen flex items-center flex-col justify-center bg-gradient-to-bl from-indigo-400 via-purple-500 to-pink-500">
+      <h3 className="text-2xl font-semibold text-gray-800 mb-6">User Form </h3>
       <div className="bg-slate-300 w-[360px] p-8 rounded-xl shadow-lg">
         <form onSubmit={handleData}>
           <InputField
@@ -86,7 +79,7 @@ const PostUser = () => {
           <Button type="submit" label="Submit" />
         </form>
       </div>
-      </div>
+    </div>
     // </div>
   );
 };
