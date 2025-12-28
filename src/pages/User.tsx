@@ -1,38 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { getUsers } from "../services/user.services";
+// import React from "react";
+// import { getUsers } from "../services/user.services";
 import type { User } from "../types/user.types";
 import Loader from "../icons/Loader";
+import { useOutletContext } from "react-router-dom";
 
-const UserPage: React.FC = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    let isMounted = true;
-    const fetchUsers = async () => {
-      try {
-        const res = await getUsers();
-        if (isMounted) {
-          setUsers(res);
-        }
-      } catch (error) {
-        if (isMounted) {
-          console.log("Failed to fetch users", error);
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
-      }
-    };
-    
-    fetchUsers();
+type contextType= {
+  loading: boolean,
+  users: User[]
+}
 
-    return () => {
-      isMounted = true;
-    };
 
-  }, []);
+const UserPage= () => {
+  const { loading, users } = useOutletContext<contextType>()
 
   if (loading) return <Loader />;
 

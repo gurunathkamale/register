@@ -1,4 +1,5 @@
 import axios from "axios";
+// import { data } from "react-router-dom";
 
 
 const axiosInstance = axios.create({
@@ -14,11 +15,20 @@ const axiosInstance = axios.create({
 
 //handle requests
 axiosInstance.interceptors.request.use((config)=>{
-    console.log('Api Request', config.url);
+      const dummyToken = "dummyToken123";
+
+    config.headers = config.headers ?? {};
+    config.headers.Authorization = `Bearer ${dummyToken}`;
+    console.log('Api Request', {
+        url: config.url,
+        method: config.method,
+        headers: config.headers,
+        data: config.data  //post payload 
+    });
     return config
 },
 (error)=>{
-    Promise.reject(error)
+   return Promise.reject(error)
 }
 )
 
@@ -26,7 +36,7 @@ axiosInstance.interceptors.request.use((config)=>{
 axiosInstance.interceptors.response.use(
     (response)=> response,
     (error)=>{
-        console.error("Api Error", error)
+        console.error("Api Error", error.response?.status, error.message)
         return Promise.reject(error)
     }
 )

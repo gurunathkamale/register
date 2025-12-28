@@ -1,7 +1,7 @@
 import React from "react";
 
 type InputFieldProps = {
-  type: "email" | "password" | "text";
+  type: "email" | "password" | "text"| "number";
   placeholder: string;
   icons?: React.ReactNode;
   value: string,
