@@ -16,6 +16,8 @@ const Login: React.FC = () => {
             Email: email,
             Password: password
         })
+        setEmail("");
+        setPassword("")
       
     }
   return (
