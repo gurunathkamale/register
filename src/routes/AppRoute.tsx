@@ -3,7 +3,7 @@ import LoginPage from "../pages/LoginPage"
 import Register from "../components/register/Register"
 
 
-import UserPage from "../pages/User"
+
 
 import Layout from "../pages/Layout"
 import UserContainer from "../pages/UserContainer"
